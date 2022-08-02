@@ -1,8 +1,55 @@
 import Input from "../components/Input";
 import { ButtonLarge } from "../components/Button";
 import React, { useContext, useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Login() {
+	const [datas, setDatas] = useState([]);
+
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	const fetchData = async () => {
+		const myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+
+		const handleSubmit = (e) => {
+			e.preventDefault();
+			const body = JSON.stringify({
+				email,
+				password,
+			});
+
+			// const body = JSON.stringify({
+			// 	email: "mbacin@gmail.com",
+			// 	password: 1234,
+			// });
+
+			const requestOptions = {
+				method: "POST",
+				headers: myHeaders,
+				body,
+				redirect: "follow",
+			};
+
+			fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)
+				.then((response) => {
+					response.json();
+					if (response) {
+						console.log(response);
+					}
+				})
+
+				.then((result) => {
+					console.log(result);
+					if (result) {
+						setDatas(result);
+					}
+				})
+				.catch((error) => console.log("error", error));
+		};
+	};
 	return (
 		<>
 			<div className="bg-white h-screen ">
@@ -36,9 +83,11 @@ export default function Login() {
 
 					<p className="text-center text-black lg:text-xl">
 						Dont't have an account?
-						<button className="ml-1 hover:text-green-900 text-blue-800">
-							Sign Up
-						</button>
+						<Link id="signup" href="/register">
+							<button className="ml-1 hover:text-green-900 text-blue-800">
+								Sign Up
+							</button>
+						</Link>
 					</p>
 				</form>
 			</div>

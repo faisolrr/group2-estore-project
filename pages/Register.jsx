@@ -1,9 +1,60 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Input from "../components/Input";
 import { ButtonLarge } from "../components/Button";
 import styles from "../styles/Home.module.css";
 
 export default function SignUp() {
+	const [datas, setDatas] = useState([]);
+	const [fullname, setFullname] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [address, setAddress] = useState("");
+	const [phonenumber, setPhonenumber] = useState("");
+
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	const fetchData = async () => {
+		const myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+
+		const handleSubmit = (e) => {
+			e.preventDefault();
+			const body = JSON.stringify({
+				fullname,
+				email,
+				password,
+				address,
+				phonenumber,
+			});
+
+			// const raw = JSON.stringify({
+			// 	name: "Cindy",
+			// 	email: "mbacin@gmail.com",
+			// 	password: 1234,
+			// 	address: "Jln. Baru No.4, Jakarta - Indonesia",
+			// 	phone: "08123247689",
+			// });
+
+			const requestOptions = {
+				method: "POST",
+				headers: myHeaders,
+				body,
+				redirect: "follow",
+			};
+
+			fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)
+				.then((response) => response.json())
+				.then((result) => {
+					console.log(result);
+					if (result) {
+						setDatas(result);
+					}
+				})
+				.catch((error) => console.log("error", error));
+		};
+	};
 	return (
 		<>
 			<div className="bg-white h-auto">
@@ -18,30 +69,30 @@ export default function SignUp() {
 					<Input
 						type="text"
 						placeholder="Fullname"
-						onChange={(e) => setName(e.target.value)}
+						onChange={(e) => setFullname(e.target.value)}
 					/>
 
 					<Input
 						type="email"
 						placeholder="Email"
-						onChange={(e) => setUsername(e.target.value)}
+						onChange={(e) => setEmail(e.target.value)}
 					/>
 
 					<Input
 						type="password"
 						placeholder="Password"
-						onChange={(e) => setNumberPhone(e.target.value)}
+						onChange={(e) => setPassword(e.target.value)}
 					/>
 
 					<Input
 						type="text"
 						placeholder="Address"
-						onChange={(e) => setPassword(e.target.value)}
+						onChange={(e) => setAddress(e.target.value)}
 					/>
 					<Input
 						type="text"
 						placeholder="Phone Number"
-						onChange={(e) => setPassword(e.target.value)}
+						onChange={(e) => setPhonenumber(e.target.value)}
 					/>
 
 					<ButtonLarge label="SIGN UP" />

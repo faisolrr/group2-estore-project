@@ -3,31 +3,28 @@ import Link from "next/link";
 
 function DashboardCard(props) {
   return (
-    <Card shadow="sm" p="lg" radius="md" withBorder>
-      <Card.Section component="a" href="https://mantine.dev/">
-        <Image
-          src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-          height={160}
-          alt="Norway"
+    <div className=" p-0 flex flex-col justify-between">
+      <div>
+        <img
+          src="https://images.pexels.com/photos/8387134/pexels-photo-8387134.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt="noimage"
+          height="750"
         />
-      </Card.Section>
-
-      <Group position="apart" mt="md" mb="xs">
-        <Text weight={500}>{props.title}</Text>
-        <Badge color="pink" variant="light">
-          On Sale
-        </Badge>
-      </Group>
-
-      <Text size="sm" color="dimmed">
-        {props.body}
-      </Text>
-      <Link id="" href="./user/transaction_summary">
-        <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-          Rp {props.price}00000
-        </Button>
-      </Link>
-    </Card>
+        <p className="border-2 border-neutral-500 p-3 text-center ">
+          Product name
+        </p>
+      </div>
+      <div>
+        <p className="p-3 text-center text-white bg-[#524f4f]">
+          IDR{props.price}
+        </p>
+        <Link href="./login">
+          <button className="mt-3 w-full p-3 text-white bg-[#557EBC]">
+            Buy
+          </button>
+        </Link>
+      </div>
+    </div>
   );
 }
 

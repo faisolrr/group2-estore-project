@@ -1,4 +1,4 @@
-import DashboardCard from "../components/Card";
+import { DashboardCard } from "../components/Card";
 import { useState, useEffect } from "react";
 
 import Header from "../components/Header";

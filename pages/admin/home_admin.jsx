@@ -66,7 +66,7 @@ function home_admin() {
       <div className="mx-8">
         <table className="w-full table-fixed border-b-2 border-neutral-400">
           <thead>
-            <tr className="text-xs md:text-lg lg:text-lg font-bold">
+            <tr className="text-black text-xs md:text-lg lg:text-lg font-bold">
               <td>PRODUCT ID</td>
               <td>PRODUCT NAME</td>
               <td>STOCK</td>

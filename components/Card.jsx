@@ -30,7 +30,7 @@ function DashboardCard(props) {
 function HomeAdminCard(props) {
   return (
     <div className="">
-      <table className="w-full table-fixed text-xs md:text-lg lg:text-2xl">
+      <table className="text-black w-full table-fixed text-xs md:text-lg lg:text-2xl">
         <thead>
           <tr>
             <td>{props.id}</td>

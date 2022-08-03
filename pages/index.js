@@ -1,6 +1,8 @@
 import DashboardCard from "../components/Card";
 import { useState, useEffect } from "react";
 
+import Header from "../components/Header";
+
 export default function Home() {
   const [datas, setDatas] = useState([]);
 
@@ -42,8 +44,8 @@ export default function Home() {
   };
   return (
     <div className="bg-[#eeee]">
-      <div>Header</div>
-      <div className="h-96 w-full bg-hero"></div>
+      <Header />
+      <div className="md:h-60 lg:h-96 w-full bg-hero"></div>
       <h1 className="text-black text-center mt-6 p-0 md:p-12 lg:p-12 text-4xl lg:text-6xl md:text-6xl">
         All Products
       </h1>

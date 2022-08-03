@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function DashboardCard(props) {
   return (
-    <div className=" p-0 flex flex-col justify-between">
+    <div className="p-0 flex flex-col justify-between">
       <div>
         <img
           src="https://images.pexels.com/photos/8387134/pexels-photo-8387134.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"

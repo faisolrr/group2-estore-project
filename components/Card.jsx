@@ -82,4 +82,41 @@ function AdminHO(props) {
   );
 }
 
-export { DashboardCard, HomeAdminCard, AdminHO };
+function DetailOrderCard() {
+  return (
+    <div className="">
+      <table className="text-black w-full table-fixed text-xs md:text-lg lg:text-3xl">
+        <thead>
+          <tr>
+            <td>#126C</td>
+            <td>T-shirt-A</td>
+            <td>1</td>
+            <td>300000</td>
+          </tr>
+        </thead>
+      </table>
+      <table className="text-black w-full table-fixed text-xs md:text-lg lg:text-3xl">
+        <thead>
+          <tr>
+            <td>#126D</td>
+            <td>T-shirt-B</td>
+            <td>1</td>
+            <td>300000</td>
+          </tr>
+        </thead>
+      </table>
+      <table className="text-black w-full table-fixed text-xs md:text-lg lg:text-3xl">
+        <thead>
+          <tr>
+            <td>#126E</td>
+            <td>T-shirt-C</td>
+            <td>2</td>
+            <td>600000</td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  );
+}
+
+export { DashboardCard, HomeAdminCard, AdminHO, DetailOrderCard };

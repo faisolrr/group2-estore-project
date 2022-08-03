@@ -14,22 +14,8 @@ function home_admin() {
   }, []);
 
   const fetchData = async () => {
-    // const myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-
-    // const raw = JSON.stringify({
-    //   name: "Cindy",
-    //   email: "mbacin@gmail.com",
-    //   password: 1234,
-    //   address: "Jln. Baru No.4, Jakarta - Indonesia",
-    //   phone: "08123247689",
-    // });
-
     const requestOptions = {
       method: "GET",
-      //   headers: myHeaders,
-      //   body: raw,
-      //   redirect: "follow",
     };
 
     fetch(

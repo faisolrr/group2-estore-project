@@ -39,7 +39,7 @@ function detail_order() {
       .then((result) => {
         console.log(result);
         if (result) {
-          setDatas(result.data);
+          setDatas(result);
         }
       })
       .catch((error) => console.log("error", error))
@@ -62,8 +62,8 @@ function detail_order() {
             <p>DATE</p>
           </div>
           <div>
-            <p>#127DC</p>
-            <p>12 June 2022</p>
+            <p>{datas.orderid}</p>
+            <p>{datas.created_at}</p>
           </div>
         </div>
 
@@ -78,10 +78,21 @@ function detail_order() {
               </tr>
             </thead>
           </table>
+          <div className="grid gap-4">
+            {datas.data.map((data) => (
+              <DetailOrderCard
+                key={data.productid}
+                id={data.productid}
+                title={data.productname}
+                stock={data.qty}
+                price={data.total}
+              />
+            ))}
+          </div>
           <DetailOrderCard />
           <div className="text-black flex flex-row justify-end space-x-4 text-xs md:text-lg lg:text-3xl mt-4 mr-10 md:mr-24 lg:mr-48">
-            <p className="font-bold">TOTAL</p>
-            <p>1200000</p>
+            <p className="font-bold">TOTAL (IDR)</p>
+            <p>{datas.data[0].total}</p>
           </div>
         </div>
         <div className="flex flex-row justify-end mt-5 mr-10 md:mr-16">

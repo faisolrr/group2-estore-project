@@ -14,6 +14,11 @@ function my_account() {
 					<p>sikakikiri@gmail.com</p>
 					<p>Semarang, Indonesia</p>
 					<p>082138793602</p>
+					<Link href="./edit_account">
+						<button className="px-4 py-2 w-auto bg-[#557EBC] text-white rounded-md md:text-lg lg:text-xl lg:py-3 lg:px-5">
+							Update Profile
+						</button>
+					</Link>
 				</div>
 				<div className="flex flex-col">
 					<h1 className="text-black text-center font-bold my-6 p-0 md:p-12 lg:p-12 text-2xl md:text-4xl lg:text-5xl">

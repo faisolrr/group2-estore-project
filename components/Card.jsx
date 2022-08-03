@@ -30,7 +30,7 @@ function DashboardCard(props) {
 function HomeAdminCard(props) {
   return (
     <div className="">
-      <table className="w-full table-fixed text-xs md:text-lg lg:text-2xl">
+      <table className="text-black w-full table-fixed text-xs md:text-lg lg:text-2xl">
         <thead>
           <tr>
             <td>{props.id}</td>
@@ -58,4 +58,28 @@ function HomeAdminCard(props) {
   );
 }
 
-export { DashboardCard, HomeAdminCard };
+function AdminHO(props) {
+  return (
+    <div className="">
+      <table className="text-black w-full table-fixed text-xs md:text-lg lg:text-3xl">
+        <thead>
+          <tr>
+            <td>{props.id}</td>
+            <td>{props.date}</td>
+            <td>{props.total}</td>
+
+            <td>
+              <Link href="../detail_order">
+                <button className="p-1 w-auto bg-[#557EBC] text-white rounded-md te md:text-xl lg:text-3xl">
+                  Detail
+                </button>
+              </Link>
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  );
+}
+
+export { DashboardCard, HomeAdminCard, AdminHO };

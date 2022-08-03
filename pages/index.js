@@ -5,14 +5,15 @@ import Header from "../components/Header";
 
 export default function Home() {
   const [datas, setDatas] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    // const myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
 
     // const raw = JSON.stringify({
     //   name: "Cindy",
@@ -40,24 +41,29 @@ export default function Home() {
           setDatas(result.data);
         }
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.log("error", error))
+      .finally(() => setLoading(false));
   };
-  return (
-    <div className="bg-[#eeee]">
-      <Header />
-      <div className="md:h-60 lg:h-96 w-full bg-hero"></div>
-      <h1 className="text-black text-center mt-6 p-0 md:p-12 lg:p-12 text-4xl lg:text-6xl md:text-6xl">
-        All Products
-      </h1>
-      <div className="m-10 gap-12 grid grid-flow-row auto-rows-max grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-        {datas.map((data) => (
-          <DashboardCard
-            key={data.productid}
-            title={data.productname}
-            price={data.price}
-          />
-        ))}
+  if (loading) {
+    return <div>Please wait...</div>;
+  } else {
+    return (
+      <div className="bg-[#eeee]">
+        <Header />
+        <div className="md:h-60 lg:h-96 w-full bg-hero"></div>
+        <h1 className="text-black text-center mt-6 p-0 md:p-12 lg:p-12 text-4xl lg:text-6xl md:text-6xl">
+          All Products
+        </h1>
+        <div className="m-10 gap-12 grid grid-flow-row auto-rows-max grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          {datas.map((data) => (
+            <DashboardCard
+              key={data.productid}
+              title={data.productname}
+              price={data.price}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

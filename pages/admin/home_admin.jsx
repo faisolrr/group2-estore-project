@@ -14,8 +14,8 @@ function home_admin() {
   }, []);
 
   const fetchData = async () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    // const myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
 
     // const raw = JSON.stringify({
     //   name: "Cindy",

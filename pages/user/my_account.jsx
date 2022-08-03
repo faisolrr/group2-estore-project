@@ -15,7 +15,7 @@ function my_account() {
 					<p>Semarang, Indonesia</p>
 					<p>082138793602</p>
 					<Link href="./edit_account">
-						<button className="px-4 py-2 w-auto bg-[#557EBC] text-white rounded-md md:text-lg lg:text-xl lg:py-3 lg:px-5">
+						<button className="px-4 py-2 w-auto bg-[#557EBC] text-white rounded-md md:text-lg lg:text-md">
 							Update Profile
 						</button>
 					</Link>
@@ -24,7 +24,7 @@ function my_account() {
 					<h1 className="text-black text-center font-bold my-6 p-0 md:p-12 lg:p-12 text-2xl md:text-4xl lg:text-5xl">
 						My Order History
 					</h1>
-					<div className="mx-8">
+					<div className="mx-8 md:mx-16">
 						<table className="w-full table-fixed">
 							<thead>
 								<tr className="text-xs md:text-lg lg:text-lg font-bold text-black border-b-2 border-neutral-400 pb-3">
@@ -39,14 +39,12 @@ function my_account() {
 									<td>299.000</td>
 									<td>
 										<Link href="../detail_order">
-											<button className="p-2 w-auto bg-[#557EBC] text-white rounded-md md:text-lg lg:text-xl lg:py-3 lg:px-5">
+											<button className="p-2 w-auto bg-[#557EBC] text-white rounded-md">
 												Detail
 											</button>
 										</Link>
-									</td>
-									<td>
 										<Link href="">
-											<button className="p-2 w-auto bg-[#C5344E] text-white rounded-md md:text-lg lg:text-xl lg:py-3 lg:px-5">
+											<button className="p-2 w-auto bg-[#C5344E] text-white rounded-md lg:ml-2">
 												Cancel
 											</button>
 										</Link>

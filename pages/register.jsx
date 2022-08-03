@@ -58,7 +58,7 @@ export default function SignUp() {
 	return (
 		<>
 			<div className="bg-white h-auto">
-				<h2 className="pt-6 pb-2 md:pb-2 text-center text-black text-3xl lg:text-4xl font-bold">
+				<h2 className="pt-6 pb-2 md:pb-2 text-center text-black text-4xl md:text-5xl lg:text-6xl font-bold">
 					Register
 				</h2>
 

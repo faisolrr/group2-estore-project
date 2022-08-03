@@ -10,13 +10,13 @@ function DashboardCard(props) {
           alt="noimage"
           height="750"
         />
-        <p className="border-2 border-neutral-500 p-3 text-center ">
-          Product name
+        <p className="text-black border-2 border-neutral-500 p-3 text-center ">
+          {props.title}
         </p>
       </div>
       <div>
         <p className="p-3 text-center text-white bg-[#524f4f]">
-          IDR{props.price}
+          IDR {props.price}
         </p>
         <Link href="./login">
           <button className="mt-3 w-full p-3 text-white bg-[#557EBC]">

@@ -2,6 +2,7 @@ import Input from "../components/Input";
 import { ButtonLarge } from "../components/Button";
 import React, { useContext, useState, useEffect } from "react";
 import Link from "next/link";
+import styles from "../styles/Home.module.css";
 
 export default function Login() {
 	const [datas, setDatas] = useState([]);
@@ -57,7 +58,7 @@ export default function Login() {
 					className="pt-20 mx-auto w-9/12 xxs:w-8/12 xs:w-7/12
          sm:w-3/5 md:w-6/12 lg:w-5/12 xl:w-5/12 flex justify-center items-center"
 				>
-					<h2 className="text-black text-xl xxs:text-2xl xs:text-3xl sm:text-4xl xl:text-5xl font-bold">
+					<h2 className="text-black text-4xl md:text-5xl lg:text-6xl font-bold">
 						Login
 					</h2>
 				</div>

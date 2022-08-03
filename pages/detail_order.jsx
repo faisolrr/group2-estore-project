@@ -51,15 +51,10 @@ function detail_order() {
     return (
       <div className="h-screen w-screen bg-[#eeee]">
         <Header />
-        <div className="my-10 md:my-14 lg:my-20 flex space-x-5 justify-center">
+        <div className="my-10 md:my-14 lg:my-20 flex justify-center">
           <h1 className="text-black text-center text-base font-bold md:text-4xl lg:text-4xl">
             Detail order
           </h1>
-          <Link href="./admin/history_order">
-            <button className="p-1 bg-[#557EBC] text-white rounded-md text-sm md:text-2xl lg:text-4xl">
-              Back
-            </button>
-          </Link>
         </div>
         <div className="text-black flex flex-row ml-5 md:ml-20 text-xs md:text-lg lg:text-2xl mb-4 space-x-8">
           <div className="font-bold">
@@ -84,10 +79,17 @@ function detail_order() {
             </thead>
           </table>
           <DetailOrderCard />
-          <div className="flex flex-row justify-end space-x-4 text-xs md:text-lg lg:text-3xl mt-4 mr-10 md:mr-24 lg:mr-48">
+          <div className="text-black flex flex-row justify-end space-x-4 text-xs md:text-lg lg:text-3xl mt-4 mr-10 md:mr-24 lg:mr-48">
             <p className="font-bold">TOTAL</p>
             <p>1200000</p>
           </div>
+        </div>
+        <div className="flex flex-row justify-end mt-5 mr-10 md:mr-16">
+          <Link href="./admin/history_order">
+            <button className="p-2 bg-[#557EBC] text-white rounded-md text-sm md:text-2xl lg:text-4xl">
+              Back
+            </button>
+          </Link>
         </div>
       </div>
     );

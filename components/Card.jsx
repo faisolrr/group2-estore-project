@@ -1,4 +1,3 @@
-import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 import Link from "next/link";
 
 function DashboardCard(props) {
@@ -28,4 +27,35 @@ function DashboardCard(props) {
   );
 }
 
-export default DashboardCard;
+function HomeAdminCard(props) {
+  return (
+    <div className="">
+      <table className="w-full table-fixed text-xs md:text-lg lg:text-2xl">
+        <thead>
+          <tr>
+            <td>{props.id}</td>
+            <td>{props.title}</td>
+            <td>{props.stock}</td>
+            <td>{props.price}</td>
+            <td>
+              <div className="space-x-1 flex">
+                <Link href="./edit_product">
+                  <button className="p-1 w-auto bg-[#557EBC] text-white rounded-md te md:text-xl lg:text-3xl">
+                    Edit
+                  </button>
+                </Link>
+                <Link href="">
+                  <button className="p-1 w-auto bg-[#C5344E] text-white rounded-md md:text-xl lg:text-3xl">
+                    Delete
+                  </button>
+                </Link>
+              </div>
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  );
+}
+
+export { DashboardCard, HomeAdminCard };

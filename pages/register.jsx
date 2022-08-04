@@ -2,59 +2,62 @@ import React, { useContext, useState, useEffect } from "react";
 import Input from "../components/Input";
 import { ButtonLarge } from "../components/Button";
 import styles from "../styles/Home.module.css";
+import { useRouter } from "next/router";
 
 export default function SignUp() {
 	const [datas, setDatas] = useState([]);
-	const [fullname, setFullname] = useState("");
+	const [nama, setNama] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [address, setAddress] = useState("");
-	const [phonenumber, setPhonenumber] = useState("");
+	const [phone, setPhone] = useState("");
+	const router = useRouter();
+	const [loading, setLoading] = useState(false);
+	const [disabled, setDisabled] = useState(true);
 
 	useEffect(() => {
-		fetchData();
-	}, []);
+		if (nama && email && password && address && phone) {
+			setDisabled(false);
+		} else {
+			setDisabled(true);
+		}
+	}, [nama, email, password, address, phone]);
 
-	const fetchData = async () => {
-		const myHeaders = new Headers();
-		myHeaders.append("Content-Type", "application/json");
-
-		const handleSubmit = (e) => {
-			e.preventDefault();
-			const body = JSON.stringify({
-				fullname,
-				email,
-				password,
-				address,
-				phonenumber,
-			});
-
-			// const raw = JSON.stringify({
-			// 	name: "Cindy",
-			// 	email: "mbacin@gmail.com",
-			// 	password: 1234,
-			// 	address: "Jln. Baru No.4, Jakarta - Indonesia",
-			// 	phone: "08123247689",
-			// });
-
-			const requestOptions = {
-				method: "POST",
-				headers: myHeaders,
-				body,
-				redirect: "follow",
-			};
-
-			fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)
-				.then((response) => response.json())
-				.then((result) => {
-					console.log(result);
-					if (result) {
-						setDatas(result);
-					}
-				})
-				.catch((error) => console.log("error", error));
+	const handleSubmit = async (e) => {
+		setLoading(true);
+		e.preventDefault();
+		const body = {
+			nama,
+			email,
+			password,
+			address,
+			phone,
 		};
+		var requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(body),
+		};
+		fetch(
+			"https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/users",
+			requestOptions
+		)
+			.then((response) => response.json())
+			.then((result) => {
+				const { message, data } = result;
+				if (result.code === 200) {
+					if (data) {
+						router.push("/login");
+					}
+				}
+				alert(message);
+			})
+			.catch((error) => {
+				alert(error.toString());
+			})
+			.finally(() => setLoading(false));
 	};
+
 	return (
 		<>
 			<div className="bg-white h-auto">
@@ -69,7 +72,7 @@ export default function SignUp() {
 					<Input
 						type="text"
 						placeholder="Fullname"
-						onChange={(e) => setFullname(e.target.value)}
+						onChange={(e) => setNama(e.target.value)}
 					/>
 
 					<Input
@@ -92,10 +95,10 @@ export default function SignUp() {
 					<Input
 						type="text"
 						placeholder="Phone Number"
-						onChange={(e) => setPhonenumber(e.target.value)}
+						onChange={(e) => setPhone(e.target.value)}
 					/>
 
-					<ButtonLarge label="SIGN UP" />
+					<ButtonLarge label="SIGN UP" loading={loading || disabled} />
 				</form>
 
 				<p className="text-center text-black  lg:text-xl">

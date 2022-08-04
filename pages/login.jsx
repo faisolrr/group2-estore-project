@@ -16,17 +16,17 @@ export default function Login() {
 	const [disabled, setDisabled] = useState(true);
 	const router = useRouter();
 
-	useEffect(() => {
-		if (token !== "0") {
-			router.push("/user/home_user");
-		} else {
-			if (email && password) {
-				setDisabled(false);
-			} else {
-				setDisabled(true);
-			}
-		}
-	}, [token, email, password]);
+	// useEffect(() => {
+	// 	if (token !== "0") {
+	// 		router.push("/user/home_user");
+	// 	} else {
+	// 		if (email && password) {
+	// 			setDisabled(false);
+	// 		} else {
+	// 			setDisabled(true);
+	// 		}
+	// 	}
+	// }, [token, email, password]);
 
 	const handleSubmit = async (e) => {
 		setLoading(true);
@@ -45,11 +45,17 @@ export default function Login() {
 			.then((result) => {
 				console.log(result);
 				const { code, message, data } = result;
-				if (code === 200) {
+				if (code === 200 && data.role === "user") {
 					const { token } = data;
 					localStorage.setItem("token", token);
 					setToken(token);
 					router.push("/user/home_user");
+				}
+				if (code === 200 && data.role === "admin") {
+					const { token } = data;
+					localStorage.setItem("token", token);
+					setToken(token);
+					router.push("/admin/home_admin");
 				}
 				alert(message);
 			})

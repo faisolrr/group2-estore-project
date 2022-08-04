@@ -22,12 +22,12 @@ function transaction_summary() {
 		)
 			.then((response) => response.json())
 			.then((result) => {
-				console.log(result);
-				if (result) {
-					setDatas(result.data);
+				const { data } = result;
+				if (data) {
+					setDatas(data);
 				}
 			})
-			.catch((error) => console.log("error", error))
+			.catch((error) => alert(error.toString()))
 			.finally(() => setLoading(false));
 	};
 	if (loading) {

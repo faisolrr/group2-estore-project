@@ -38,17 +38,12 @@ export default function SignUp() {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(body),
 		};
-		fetch(
-			"https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/users",
-			requestOptions
-		)
+		fetch("https://rubahmerah.site/users", requestOptions)
 			.then((response) => response.json())
 			.then((result) => {
-				const { message, data } = result;
-				if (result.code === 200) {
-					if (data) {
-						router.push("/login");
-					}
+				const { message, code, data } = result;
+				if (code === 200) {
+					router.push("/login");
 				}
 				alert(message);
 			})

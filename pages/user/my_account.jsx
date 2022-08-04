@@ -7,7 +7,6 @@ function my_account() {
 	const [datas, setDatas] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [account, setAccount] = useState([]);
-	console.log(account);
 
 	useEffect(() => {
 		fetchData();
@@ -24,15 +23,15 @@ function my_account() {
 		)
 			.then((response) => response.json())
 			.then((result) => {
-				console.log(result);
-				if (result) {
-					setDatas(result.data.order);
+				const { data } = result;
+				if (data) {
+					setDatas(data.order);
 				}
-				if (result) {
-					setAccount(result.data);
+				if (data) {
+					setAccount(data);
 				}
 			})
-			.catch((error) => console.log("error", error))
+			.catch((error) => alert(error.toString()))
 			.finally(() => setLoading(false));
 	};
 	if (loading) {

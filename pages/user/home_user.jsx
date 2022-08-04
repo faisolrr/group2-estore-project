@@ -1,4 +1,4 @@
-import { DashboardCard } from "../../components/Card";
+import { HomeUser } from "../../components/Card";
 import { useState, useEffect } from "react";
 
 import Header from "../../components/Header";
@@ -36,12 +36,12 @@ export default function home_user() {
 		)
 			.then((response) => response.json())
 			.then((result) => {
-				console.log(result);
-				if (result) {
-					setDatas(result.data);
+				const { data } = result;
+				if (data) {
+					setDatas(data);
 				}
 			})
-			.catch((error) => console.log("error", error))
+			.catch((error) => alert(error.toString()))
 			.finally(() => setLoading(false));
 	};
 	if (loading) {
@@ -56,7 +56,7 @@ export default function home_user() {
 				</h1>
 				<div className="m-10 gap-12 grid grid-flow-row auto-rows-max grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
 					{datas.map((data) => (
-						<DashboardCard
+						<HomeUser
 							key={data.productid}
 							title={data.productname}
 							price={data.price}

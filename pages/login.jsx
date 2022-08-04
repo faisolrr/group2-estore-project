@@ -2,55 +2,63 @@ import Input from "../components/Input";
 import { ButtonLarge } from "../components/Button";
 import React, { useContext, useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
+import { createContext } from "react";
+import { TokenContext } from "../utils/context";
 
 export default function Login() {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const { token, setToken } = useContext(TokenContext);
 	const [datas, setDatas] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [disabled, setDisabled] = useState(true);
+	const router = useRouter();
 
 	useEffect(() => {
-		fetchData();
-	}, []);
+		if (token !== "0") {
+			router.push("/user/home_user");
+		} else {
+			if (email && password) {
+				setDisabled(false);
+			} else {
+				setDisabled(true);
+			}
+		}
+	}, [token, email, password]);
 
-	const fetchData = async () => {
-		const myHeaders = new Headers();
-		myHeaders.append("Content-Type", "application/json");
-
-		const handleSubmit = (e) => {
-			e.preventDefault();
-			const body = JSON.stringify({
-				email,
-				password,
-			});
-
-			// const body = JSON.stringify({
-			// 	email: "mbacin@gmail.com",
-			// 	password: 1234,
-			// });
-
-			const requestOptions = {
-				method: "POST",
-				headers: myHeaders,
-				body,
-				redirect: "follow",
-			};
-
-			fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)
-				.then((response) => {
-					response.json();
-					if (response) {
-						console.log(response);
-					}
-				})
-
-				.then((result) => {
-					console.log(result);
-					if (result) {
-						setDatas(result);
-					}
-				})
-				.catch((error) => console.log("error", error));
+	const handleSubmit = async (e) => {
+		setLoading(true);
+		e.preventDefault();
+		const body = {
+			email,
+			password,
 		};
+		var requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(body),
+		};
+		fetch("https://rubahmerah.site/login", requestOptions)
+			.then((response) => response.json())
+			.then((result) => {
+				console.log(result);
+				const { code, message, data } = result;
+				if (code === 200) {
+					const { token } = data;
+					localStorage.setItem("token", token);
+					setToken(token);
+					router.push("/user/home_user");
+				}
+				alert(message);
+			})
+			.catch((err) => {
+				alert(err.toString());
+			})
+			.finally(() => setLoading(false));
 	};
+
 	return (
 		<>
 			<div className="bg-white h-screen ">

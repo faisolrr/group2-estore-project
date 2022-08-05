@@ -47,7 +47,7 @@ function my_account() {
 						<p>{account.name}</p>
 						<p>{account.email}</p>
 						<p>{account.address}</p>
-						<p>{account.order.phone}</p>
+						<p>{account.phone}</p>
 						<Link href="./edit_account">
 							<button className="px-4 py-2 w-auto bg-[#557EBC] text-white rounded-md md:text-lg lg:text-md">
 								Update Profile

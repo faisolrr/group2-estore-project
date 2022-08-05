@@ -30,10 +30,7 @@ export default function home_user() {
 			//   redirect: "follow",
 		};
 
-		fetch(
-			"https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/products",
-			requestOptions
-		)
+		fetch("https://rubahmerah.site/products", requestOptions)
 			.then((response) => response.json())
 			.then((result) => {
 				const { data } = result;
@@ -58,7 +55,8 @@ export default function home_user() {
 					{datas.map((data) => (
 						<HomeUser
 							key={data.productid}
-							title={data.productname}
+							image={data.image}
+							title={data.name}
 							price={data.price}
 						/>
 					))}

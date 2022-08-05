@@ -13,12 +13,16 @@ function detail_order() {
   }, []);
 
   const fetchData = async () => {
+    const body = 1;
     const requestOptions = {
       method: "GET",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
     };
 
     fetch(
-      "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/orders/idorder",
+      "https://rubahmerah.site/admins/history",
+
       requestOptions
     )
       .then((response) => response.json())

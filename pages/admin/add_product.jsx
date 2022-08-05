@@ -1,11 +1,13 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 
 import HeaderAdmin from "../../components/HeaderAdmin";
 import CustomInput from "../../components/CustomInput";
+import { TokenContext } from "../../utils/context";
 
 function add_product() {
+  const { setToken } = useContext(TokenContext);
   const [name, setName] = useState("");
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
@@ -18,7 +20,7 @@ function add_product() {
     setLoading(true);
     e.preventDefault();
 
-    var formdata = new FormData();
+    const formdata = new FormData();
     formdata.append("name", name);
     formdata.append("price", price);
     formdata.append("stock", stock);
@@ -32,11 +34,7 @@ function add_product() {
       body: formdata,
     };
 
-    fetch(
-      "https://rubahmerah.site/admins",
-      // "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins",
-      requestOptions
-    )
+    fetch("https://rubahmerah.site/admins", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         const { message, code } = result;
@@ -46,7 +44,7 @@ function add_product() {
         }
       })
       .catch((error) => {
-        alert(error, toString());
+        alert("wrong input");
       })
       .finally(() => setLoading(false));
   };
@@ -62,7 +60,8 @@ function add_product() {
               id="input-file"
               type="file"
               onChange={(e) => {
-                setImage(e.target.value);
+                setImage(URL.createObjectURL(e.target.files[0]));
+                setImage(e.target.files[0], "image");
               }}
             />
           </div>

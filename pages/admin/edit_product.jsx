@@ -6,6 +6,7 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import CustomInput from "../../components/CustomInput";
 
 function add_product() {
+  const [objSubmit, setObjSubmit] = useState("");
   const [name, setName] = useState("");
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
@@ -17,6 +18,7 @@ function add_product() {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+
     var formdata = new FormData();
     formdata.append("name", name);
     formdata.append("price", price);
@@ -31,11 +33,7 @@ function add_product() {
       body: formdata,
     };
 
-    fetch(
-      "https://rubahmerah.site/admins",
-      // "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins",
-      requestOptions
-    )
+    fetch("https://rubahmerah.site/admins", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         const { message, code } = result;
@@ -50,6 +48,12 @@ function add_product() {
       .finally(() => setLoading(false));
   };
 
+  const handleChange = (value, key) => {
+    let temp = { ...objSubmit };
+    temp[key] = value;
+    setObjSubmit(temp);
+  };
+
   return (
     <>
       <div className="pb-10 min-h-screen bg-[#eeee]">
@@ -61,7 +65,8 @@ function add_product() {
               id="input-file"
               type="file"
               onChange={(e) => {
-                setImage(e.target.value);
+                setImage(URL.createObjectURL(e.target.files[0]));
+                handleChange(e.target.files[0], "image");
               }}
             />
           </div>
@@ -71,7 +76,7 @@ function add_product() {
                 className="p-6 md:p-8 md:px-20 rounded-md bg-[#D9D9D9]"
                 type="text"
                 placeholder="PRODUCT NAME"
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => handleChange(e.target.value, "name")}
               />
             </div>
             <div className="flex justify-center mb-5">
@@ -79,7 +84,7 @@ function add_product() {
                 className="p-6 md:p-8 md:px-20 rounded-md bg-[#D9D9D9]"
                 type="text"
                 placeholder="STOCK"
-                onChange={(e) => setStock(e.target.value)}
+                onChange={(e) => handleChange(e.target.value, "stock")}
               />
             </div>
             <div className="flex justify-center mb-5">
@@ -87,7 +92,7 @@ function add_product() {
                 className="p-6 md:p-8 md:px-20 rounded-md bg-[#D9D9D9]"
                 type="text"
                 placeholder="PRICE (IDR)"
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => handleChange(e.target.value, "price")}
               />
             </div>
 

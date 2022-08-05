@@ -18,11 +18,7 @@ function home_admin() {
       method: "GET",
     };
 
-    fetch(
-      "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins/history",
-      // "https://rubahmerah.site/admins/history",
-      requestOptions
-    )
+    fetch("https://rubahmerah.site/admins/history", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         const { data } = result;

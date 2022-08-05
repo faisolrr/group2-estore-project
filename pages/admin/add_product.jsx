@@ -44,7 +44,7 @@ function add_product() {
         }
       })
       .catch((error) => {
-        alert(error, toString());
+        alert("wrong input");
       })
       .finally(() => setLoading(false));
   };

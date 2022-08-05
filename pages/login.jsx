@@ -43,7 +43,6 @@ export default function Login() {
 		fetch("https://rubahmerah.site/login", requestOptions)
 			.then((response) => response.json())
 			.then((result) => {
-				console.log(result);
 				const { code, message, data } = result;
 				if (code === 200 && data.role === "user") {
 					const { token } = data;

@@ -15,6 +15,7 @@ export default function EditAccount() {
 	const handleSubmit = async (e) => {
 		setLoading(true);
 		e.preventDefault();
+
 		const formData = new FormData();
 		for (const key in objSubmit) {
 			formData.append(key, objSubmit[key]);
@@ -27,9 +28,13 @@ export default function EditAccount() {
 			body: formData,
 		};
 
-		fetch("", requestOptions)
+		fetch(
+			"https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/users",
+			requestOptions
+		)
 			.then((response) => response.json())
 			.then((result) => {
+				console.log(result);
 				const { message } = result;
 				alert(message);
 				setObjSubmit({});

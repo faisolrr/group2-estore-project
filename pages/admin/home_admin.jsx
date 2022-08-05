@@ -51,8 +51,11 @@ function home_admin() {
     fetch(`https://rubahmerah.site/admins/${idDelete}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        const { message } = result;
+        const { message, code } = result;
         alert(message);
+        if (code === 200) {
+          location.reload();
+        }
       })
       .catch((error) => {
         alert(error, toString());

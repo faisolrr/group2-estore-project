@@ -21,8 +21,7 @@ function detail_order() {
     };
 
     fetch(
-      "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/orders/idorder",
-      //  "https://rubahmerah.site/admins/history",
+      "https://rubahmerah.site/admins/history",
 
       requestOptions
     )

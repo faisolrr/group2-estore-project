@@ -13,22 +13,8 @@ function detail_order() {
   }, []);
 
   const fetchData = async () => {
-    // const myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-
-    // const raw = JSON.stringify({
-    //   name: "Cindy",
-    //   email: "mbacin@gmail.com",
-    //   password: 1234,
-    //   address: "Jln. Baru No.4, Jakarta - Indonesia",
-    //   phone: "08123247689",
-    // });
-
     const requestOptions = {
       method: "GET",
-      //   headers: myHeaders,
-      //   body: raw,
-      //   redirect: "follow",
     };
 
     fetch(
@@ -37,12 +23,12 @@ function detail_order() {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
-        if (result) {
-          setDatas(result);
+        const { data } = result;
+        if (data) {
+          setDatas(data);
         }
       })
-      .catch((error) => console.log("error", error))
+      .catch((error) => alert(error.toString))
       .finally(() => setLoading(false));
   };
   if (loading) {
@@ -79,7 +65,7 @@ function detail_order() {
             </thead>
           </table>
           <div className="grid gap-4">
-            {datas.data.map((data) => (
+            {datas[0].map((data) => (
               <DetailOrderCard
                 key={data.productid}
                 id={data.productid}
@@ -92,7 +78,7 @@ function detail_order() {
           <DetailOrderCard />
           <div className="text-black flex flex-row justify-end space-x-4 text-xs md:text-lg lg:text-3xl mt-4 mr-10 md:mr-24 lg:mr-48">
             <p className="font-bold">TOTAL (IDR)</p>
-            <p>{datas.data[0].total}</p>
+            <p>{datas[0].total}</p>
           </div>
         </div>
         <div className="flex flex-row justify-end mt-5 mr-10 md:mr-16">

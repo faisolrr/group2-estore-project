@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-import Header from "../../components/Header";
+import HeaderAdmin from "../../components/HeaderAdmin";
 import { AdminHO } from "../../components/Card";
 
 function home_admin() {
@@ -19,17 +19,18 @@ function home_admin() {
     };
 
     fetch(
-      "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins/history",
+      // "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins/history",
+      "https://rubahmerah.site/admins/history",
       requestOptions
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
-        if (result) {
-          setDatas(result.data);
+        const { data } = result;
+        if (data) {
+          setDatas(data);
         }
       })
-      .catch((error) => console.log("error", error))
+      .catch((error) => alert(error.toString))
       .finally(() => setLoading(false));
   };
   if (loading) {
@@ -37,7 +38,7 @@ function home_admin() {
   } else {
     return (
       <div className="h-screen w-screen bg-[#eeee]">
-        <Header />
+        <HeaderAdmin />
         <div className="my-10 md:my-14 lg:my-20 flex space-x-5 justify-center">
           <h1 className="text-black text-center text-base font-bold md:text-4xl lg:text-4xl">
             All Users Order History

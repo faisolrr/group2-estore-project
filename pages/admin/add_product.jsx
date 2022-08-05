@@ -33,8 +33,8 @@ function add_product() {
     };
 
     fetch(
-      "https://rubahmerah.site/admins",
-      // "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins",
+      // "https://rubahmerah.site/admins",
+      "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins",
       requestOptions
     )
       .then((response) => response.json())
@@ -62,7 +62,8 @@ function add_product() {
               id="input-file"
               type="file"
               onChange={(e) => {
-                setImage(e.target.value);
+                setImage(URL.createObjectURL(e.target.files[0]));
+                handleChange(e.target.files[0], "image");
               }}
             />
           </div>

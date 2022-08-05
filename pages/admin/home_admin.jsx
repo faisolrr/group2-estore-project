@@ -21,7 +21,11 @@ function home_admin() {
       },
     };
 
-    fetch("https://rubahmerah.site/admins", requestOptions)
+    fetch(
+      // "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins/history",
+      "https://rubahmerah.site/admins",
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         const { data } = result;

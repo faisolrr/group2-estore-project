@@ -10,6 +10,7 @@ function add_product() {
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
+  const [objSubmit, setObjSubmit] = useState("");
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -17,37 +18,33 @@ function add_product() {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    var formdata = new FormData();
-    formdata.append("name", name);
-    formdata.append("price", price);
-    formdata.append("stock", stock);
-    formdata.append("image", image);
-
+    const formData = new FormData();
+    for (const key in objSubmit) {
+      formData.append(key, objSubmit[key]);
+    }
     var requestOptions = {
-      method: "POST",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: formdata,
+      body: formData,
     };
 
-    fetch(
-      "https://rubahmerah.site/admins",
-      // "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins",
-      requestOptions
-    )
+    fetch("https://rubahmerah.site/admins", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        const { message, code } = result;
+        const { message } = result;
         alert(message);
-        if (code === 200) {
-          router.push("/admin/home_admin");
-        }
+        setObjSubmit({});
       })
-      .catch((error) => {
-        alert(error, toString());
-      })
-      .finally(() => setLoading(false));
+      .catch((error) => console.log("error", error))
+      .finally(() => fetchData());
+  };
+
+  const handleChange = (value, key) => {
+    let temp = { ...objSubmit };
+    temp[key] = value;
+    setObjSubmit(temp);
   };
 
   return (

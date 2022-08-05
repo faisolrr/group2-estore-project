@@ -19,8 +19,8 @@ function home_admin() {
     };
 
     fetch(
-      // "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins/history",
-      "https://rubahmerah.site/admins/history",
+      "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins/history",
+      // "https://rubahmerah.site/admins/history",
       requestOptions
     )
       .then((response) => response.json())

@@ -8,6 +8,7 @@ import { HomeAdminCard } from "../../components/Card";
 function home_admin() {
   const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [idDelete, setIdDelete] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -21,11 +22,7 @@ function home_admin() {
       },
     };
 
-    fetch(
-      // "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins/history",
-      "https://rubahmerah.site/admins",
-      requestOptions
-    )
+    fetch("https://rubahmerah.site/admins", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         const { data } = result;
@@ -40,11 +37,34 @@ function home_admin() {
       .finally(() => setLoading(false));
   };
 
+  const handleDelete = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    var requestOptions = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    fetch(`https://rubahmerah.site/admins/${idDelete}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const { message } = result;
+        alert(message);
+      })
+      .catch((error) => {
+        alert(error, toString());
+      })
+      .finally(() => setLoading(false));
+  };
+
   if (loading) {
     return <div>Please wait...</div>;
   } else {
     return (
-      <div className="h-screen w-screen bg-[#eeee]">
+      <div className="pb-10 h-screen w-screen bg-[#eeee]">
         <HeaderAdmin />
         <div className="mt-10 md:mt-14 lg:mt-20 flex space-x-5 justify-center">
           <Link href="./add_product">
@@ -86,6 +106,27 @@ function home_admin() {
             ))}
           </div>
         </div>
+        <div className="flex justify-center">
+          <p>input product id for delete !</p>
+        </div>
+        <form onSubmit={(e) => handleDelete(e)}>
+          <div className="flex justify-center">
+            <input
+              className="w-20 py-1 rounded-md bg-[#D9D9D9]"
+              type="text"
+              placeholder="id!"
+              onChange={(e) => setIdDelete(e.target.value)}
+            />
+          </div>
+          <div className="my-3 flex justify-center">
+            <button
+              className="px-2 py-2 bg-[#C5344E] text-white rounded-md text-xs md:text-xl lg:text-2xl"
+              type="submit"
+            >
+              Delete
+            </button>
+          </div>
+        </form>
       </div>
     );
   }

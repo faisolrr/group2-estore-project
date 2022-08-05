@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-import Header from "../../components/Header";
+import HeaderAdmin from "../../components/HeaderAdmin";
 import { HomeAdminCard } from "../../components/Card";
 
 function home_admin() {
@@ -16,20 +16,23 @@ function home_admin() {
   const fetchData = async () => {
     const requestOptions = {
       method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     };
 
-    fetch(
-      "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/admins",
-      requestOptions
-    )
+    fetch("https://rubahmerah.site/admins", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        const { data } = result;
+        if (data) {
+          setDatas(data);
+        }
         if (result) {
-          setDatas(result.data);
+          setDatas(result);
         }
       })
-      .catch((error) => console.log("error", error))
+      .catch((error) => alert(error.toSting))
       .finally(() => setLoading(false));
   };
 
@@ -38,7 +41,7 @@ function home_admin() {
   } else {
     return (
       <div className="h-screen w-screen bg-[#eeee]">
-        <Header />
+        <HeaderAdmin />
         <div className="mt-10 md:mt-14 lg:mt-20 flex space-x-5 justify-center">
           <Link href="./add_product">
             <button className="w-auto bg-[#557EBC] p-2 text-white rounded-md md:text-2xl lg:text-4xl">
@@ -70,9 +73,9 @@ function home_admin() {
           <div className="grid gap-4">
             {datas.map((data) => (
               <HomeAdminCard
-                key={data.productid}
-                id={data.productid}
-                title={data.productname}
+                key={data.id}
+                id={data.id}
+                title={data.name}
                 stock={data.stock}
                 price={data.price}
               />

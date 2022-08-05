@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { ButtonSmall } from "./Button";
 import { TokenContext } from "../utils/context";
-import Link from "next/link";
 
 function Header() {
   const router = useRouter();
@@ -16,10 +15,6 @@ function Header() {
   return (
     <div className="h-18 bg-white sticky top-0 flex justify-between">
       <p className="text-neutral-700 font-bold p-5 text-xl">E-STORE</p>
-      <Link href="/user/my_account">
-        <p className="text-neutral-700 font-bold p-5 text-xl">My Account</p>
-      </Link>
-
       <div className="p-5">
         <ButtonSmall label="Logout" onClick={() => handleLogout()} />
       </div>

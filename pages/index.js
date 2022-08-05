@@ -1,7 +1,8 @@
 import { DashboardCard } from "../components/Card";
 import { useState, useEffect } from "react";
 
-import Header from "../components/Header";
+import { ButtonSmall } from "../components/Button";
+import Link from "next/link";
 
 export default function Home() {
   const [datas, setDatas] = useState([]);
@@ -16,18 +17,15 @@ export default function Home() {
       method: "GET",
     };
 
-    fetch(
-      "https://virtserver.swaggerhub.com/vaniliacahya/E-Store/1.0.0/products",
-      requestOptions
-    )
+    fetch("https://rubahmerah.site/products", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         if (result) {
-          setDatas(result.data);
+          const { data } = result;
+          setDatas(data);
         }
       })
-      .catch((error) => console.log("error", error))
+      .catch((error) => alert(error.toString))
       .finally(() => setLoading(false));
   };
   if (loading) {
@@ -35,7 +33,14 @@ export default function Home() {
   } else {
     return (
       <div className="bg-[#eeee]">
-        <Header />
+        <Link href="/login">
+          <div className="h-18 bg-white sticky top-0 flex justify-between">
+            <p className="text-neutral-700 font-bold p-5 text-xl">E-STORE</p>
+            <div className="p-5">
+              <ButtonSmall label="Login" />
+            </div>
+          </div>
+        </Link>
         <div className="md:h-60 lg:h-96 w-full bg-hero"></div>
         <h1 className="text-black text-center mt-6 p-0 md:p-12 lg:p-12 text-4xl lg:text-6xl md:text-6xl">
           All Products
@@ -43,8 +48,9 @@ export default function Home() {
         <div className="m-10 gap-12 grid grid-flow-row auto-rows-max grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           {datas.map((data) => (
             <DashboardCard
-              key={data.productid}
-              title={data.productname}
+              key={data.id}
+              image={data.image}
+              title={data.name}
               price={data.price}
             />
           ))}

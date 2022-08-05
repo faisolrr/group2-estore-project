@@ -6,11 +6,11 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import CustomInput from "../../components/CustomInput";
 
 function add_product() {
+  const [objSubmit, setObjSubmit] = useState("");
   const [name, setName] = useState("");
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [objSubmit, setObjSubmit] = useState("");
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -18,27 +18,34 @@ function add_product() {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const formData = new FormData();
-    for (const key in objSubmit) {
-      formData.append(key, objSubmit[key]);
-    }
+
+    var formdata = new FormData();
+    formdata.append("name", name);
+    formdata.append("price", price);
+    formdata.append("stock", stock);
+    formdata.append("image", image);
+
     var requestOptions = {
-      method: "PUT",
+      method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: formData,
+      body: formdata,
     };
 
     fetch("https://rubahmerah.site/admins", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        const { message } = result;
+        const { message, code } = result;
         alert(message);
-        setObjSubmit({});
+        if (code === 200) {
+          router.push("/admin/home_admin");
+        }
       })
-      .catch((error) => console.log("error", error))
-      .finally(() => fetchData());
+      .catch((error) => {
+        alert(error, toString());
+      })
+      .finally(() => setLoading(false));
   };
 
   const handleChange = (value, key) => {
@@ -58,7 +65,8 @@ function add_product() {
               id="input-file"
               type="file"
               onChange={(e) => {
-                setImage(e.target.value);
+                setImage(URL.createObjectURL(e.target.files[0]));
+                handleChange(e.target.files[0], "image");
               }}
             />
           </div>
@@ -68,7 +76,7 @@ function add_product() {
                 className="p-6 md:p-8 md:px-20 rounded-md bg-[#D9D9D9]"
                 type="text"
                 placeholder="PRODUCT NAME"
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => handleChange(e.target.value, "name")}
               />
             </div>
             <div className="flex justify-center mb-5">
@@ -76,7 +84,7 @@ function add_product() {
                 className="p-6 md:p-8 md:px-20 rounded-md bg-[#D9D9D9]"
                 type="text"
                 placeholder="STOCK"
-                onChange={(e) => setStock(e.target.value)}
+                onChange={(e) => handleChange(e.target.value, "stock")}
               />
             </div>
             <div className="flex justify-center mb-5">
@@ -84,7 +92,7 @@ function add_product() {
                 className="p-6 md:p-8 md:px-20 rounded-md bg-[#D9D9D9]"
                 type="text"
                 placeholder="PRICE (IDR)"
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => handleChange(e.target.value, "price")}
               />
             </div>
 

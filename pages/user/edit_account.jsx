@@ -6,56 +6,38 @@ import Link from "next/link";
 
 export default function EditAccount() {
 	const [datas, setDatas] = useState([]);
-	const [fullname, setFullname] = useState("");
+	const [nama, setNama] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [address, setAddress] = useState("");
-	const [phonenumber, setPhonenumber] = useState("");
+	const [phone, setPhone] = useState("");
 
-	useEffect(() => {
-		fetchData();
-	}, []);
+	const handleSubmit = async (e) => {
+		setLoading(true);
+		e.preventDefault();
+		const formData = new FormData();
+		for (const key in objSubmit) {
+			formData.append(key, objSubmit[key]);
+		}
+		var requestOptions = {
+			method: "PUT",
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+			body: formData,
+		};
 
-	const fetchData = async () => {
-		const myHeaders = new Headers();
-		myHeaders.append("Content-Type", "application/json");
-
-		// const handleSubmit = (e) => {
-		// 	e.preventDefault();
-		// 	const body = JSON.stringify({
-		// 		fullname,
-		// 		email,
-		// 		password,
-		// 		address,
-		// 		phonenumber,
-		// 	});
-
-		// const raw = JSON.stringify({
-		// 	name: "Cindy",
-		// 	email: "mbacin@gmail.com",
-		// 	password: 1234,
-		// 	address: "Jln. Baru No.4, Jakarta - Indonesia",
-		// 	phone: "08123247689",
-		// });
-
-		// const requestOptions = {
-		// 	method: "POST",
-		// 	headers: myHeaders,
-		// 	body,
-		// 	redirect: "follow",
-		// };
-
-		// 	fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)
-		// 		.then((response) => response.json())
-		// 		.then((result) => {
-		// 			console.log(result);
-		// 			if (result) {
-		// 				setDatas(result);
-		// 			}
-		// 		})
-		// 		.catch((error) => console.log("error", error));
-		// };
+		fetch("", requestOptions)
+			.then((response) => response.json())
+			.then((result) => {
+				const { message } = result;
+				alert(message);
+				setObjSubmit({});
+			})
+			.catch((error) => alert("update failed"))
+			.finally(() => fetchData());
 	};
+
 	return (
 		<>
 			<div className="bg-white h-auto">
@@ -65,12 +47,12 @@ export default function EditAccount() {
 
 				<form
 					className="mb-4 mt-10 text-center flex flex-col gap-5"
-					// onSubmit={(e) => handleSubmit(e)}
+					onSubmit={(e) => handleSubmit(e)}
 				>
 					<Input
 						type="text"
 						placeholder="Update Fullname"
-						onChange={(e) => setFullname(e.target.value)}
+						onChange={(e) => setNama(e.target.value)}
 					/>
 
 					<Input
@@ -93,7 +75,7 @@ export default function EditAccount() {
 					<Input
 						type="text"
 						placeholder="Update Phone Number"
-						onChange={(e) => setPhonenumber(e.target.value)}
+						onChange={(e) => setPhone(e.target.value)}
 					/>
 					<Link href="./my_account">
 						<ButtonLarge label="UPDATE" />

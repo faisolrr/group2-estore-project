@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import Link from "next/link";
 import { ButtonLarge, ButtonSmall } from "../../components/Button";
 
-function transaction_summary() {
+function TransactionSummary() {
 	const [datas, setDatas] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -72,4 +72,4 @@ function transaction_summary() {
 	}
 }
 
-export default transaction_summary;
+export default TransactionSummary;

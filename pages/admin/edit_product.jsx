@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import CustomInput from "../../components/CustomInput";
 
-function add_product() {
+function EditProduct() {
   const [objSubmit, setObjSubmit] = useState("");
   const [name, setName] = useState("");
   const [stock, setStock] = useState("");
@@ -119,4 +119,4 @@ function add_product() {
   );
 }
 
-export default add_product;
+export default EditProduct;

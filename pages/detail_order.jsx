@@ -4,7 +4,7 @@ import Link from "next/link";
 import Header from "../components/Header";
 import { DetailOrderCard } from "../components/Card";
 
-function detail_order() {
+function DetailOrder() {
   const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -97,4 +97,4 @@ function detail_order() {
   }
 }
 
-export default detail_order;
+export default DetailOrder;

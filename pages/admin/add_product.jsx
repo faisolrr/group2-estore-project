@@ -6,7 +6,7 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import CustomInput from "../../components/CustomInput";
 import { TokenContext } from "../../utils/context";
 
-function add_product() {
+function AddProduct() {
   const { setToken } = useContext(TokenContext);
   const [name, setName] = useState("");
   const [stock, setStock] = useState("");
@@ -114,4 +114,4 @@ function add_product() {
   );
 }
 
-export default add_product;
+export default AddProduct;

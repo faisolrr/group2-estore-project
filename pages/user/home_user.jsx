@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import Header from "../../components/Header";
 
-export default function HomeUser() {
+export default function HomeUsers() {
 	const [datas, setDatas] = useState([]);
 	const [loading, setLoading] = useState(true);
 

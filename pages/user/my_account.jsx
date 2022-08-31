@@ -3,7 +3,7 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import { MyAccount } from "../../components/Card";
 
-function MyAccount() {
+function MyDetailAccount() {
 	const [datas, setDatas] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [account, setAccount] = useState([]);
@@ -87,4 +87,4 @@ function MyAccount() {
 	}
 }
 
-export default MyAccount;
+export default MyDetailAccount;

@@ -5,7 +5,7 @@ import Link from "next/link";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import { HomeAdminCard } from "../../components/Card";
 
-function home_admin() {
+function HomeAdmin() {
   const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [idDelete, setIdDelete] = useState([]);
@@ -135,4 +135,4 @@ function home_admin() {
   }
 }
 
-export default home_admin;
+export default HomeAdmin;

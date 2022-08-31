@@ -96,7 +96,7 @@ export default function Login() {
 					<ButtonLarge label="LOGIN" />
 
 					<p className="text-center text-black lg:text-xl">
-						Dont't have an account?
+						Don&apos;t have an account?
 						<Link id="signup" href="/register">
 							<button className="ml-1 hover:text-green-900 text-blue-800">
 								Sign Up

@@ -5,7 +5,7 @@ import Link from "next/link";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import { AdminHO } from "../../components/Card";
 
-function home_admin() {
+function HistoryOrder() {
   const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -73,4 +73,4 @@ function home_admin() {
   }
 }
 
-export default home_admin;
+export default HistoryOrder;
